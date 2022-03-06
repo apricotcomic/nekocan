@@ -1,43 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nekocan/settings/setting_menu.dart';
 
-void main() {
-  runApp(const NekocanApp());
-}
 
-class NekocanApp extends StatelessWidget {
-  const NekocanApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'nekocan',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const NekocanHomePage(title: '猫缶'),
-    );
-  }
-}
-
-class NekocanHomePage extends StatefulWidget {
-  const NekocanHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<NekocanHomePage> createState() => _NekocanHomePageState();
-}
-
-class _NekocanHomePageState extends State<NekocanHomePage> {
-  final List _cardList = ['あげたもの', '買ったもの', '設定'];
+class SettingMenu extends StatelessWidget {
+  final List _cardList = ['猫', '商品', '店'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
         body: Container(
           padding: const EdgeInsets.all(12),
           child: ListView.builder(
@@ -87,4 +57,5 @@ class _NekocanHomePageState extends State<NekocanHomePage> {
       }
     }
   }
+  
 }

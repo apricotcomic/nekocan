@@ -32,6 +32,9 @@ dependencies:
   sqflite: 
   path:
   intl:
+  freezed_annotation: 
+  flutter_riverpod: 
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -43,6 +46,8 @@ dev_dependencies:
     sdk: flutter
   mockito:
   build_runner:
+  freezed: 
+  json_serializable: 
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
