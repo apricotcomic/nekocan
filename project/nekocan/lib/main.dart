@@ -63,21 +63,21 @@ class _NekocanHomePageState extends State<NekocanHomePage> {
   }
 
   void gotoNextScreen(BuildContext context, int index) {
-    if (index == 1) {
+    if (index == 0) {
       var route = MaterialPageRoute(
         settings: const RouteSettings(name: '/settings/setting_menu'),
         builder: (BuildContext context) => SettingMenu(),
       );
       Navigator.push(context, route);
     } else {
-      if (index == 2) {
+      if (index == 1) {
         var route = MaterialPageRoute(
           settings: const RouteSettings(name: '/settings/setting_menu'),
           builder: (BuildContext context) => SettingMenu(),
         );
         Navigator.push(context, route);
       } else {
-        if (index == 3) {
+        if (index == 2) {
           var route = MaterialPageRoute(
             settings: const RouteSettings(name: '/settings/setting_menu'),
             builder: (BuildContext context) => SettingMenu(),
