@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:nekocan/model/cats.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nekocan/common/cats_helper.dart';
+import 'package:nekocan/settings/cats/view/cat_detail.dart';
+import 'package:nekocan/settings/cats/view/cat_edit.dart';
 
 // catテーブルの内容全件を一覧表示するクラス
-class CatList extends ConsumerStatefulWidget {
+class CatList extends StatefulWidget {
   const CatList({Key? key}) : super(key: key);
 
   @override
   _CatListPageState createState() => _CatListPageState();
 }
 
-class _CatListPageState extends ConsumerState<CatList> {
-  List<CatListState> catListState = [];
+class _CatListPageState extends State<CatList> {
   List<Cats> catList = [];  //catsテーブルの全件を保有する
   bool isLoading = false;   //テーブル読み込み中の状態を保有する
 
@@ -20,15 +21,14 @@ class _CatListPageState extends ConsumerState<CatList> {
   @override
   void initState() {
     super.initState();
-    ref.read(catListProvider.notifier);
+    getCatsList();
   }
 
 // initStateで動かす処理。
 // catsテーブルに登録されている全データを取ってくる
   Future getCatsList() async {
     setState(() => isLoading = true);                   //テーブル読み込み前に「読み込み中」の状態にする
-    catListState = ref.watch(catListProvider);  //catsテーブルを全件読み込む
-    catList = catListState.cast();
+    catList = await CatsHelper.instance.selectAllCats();  //catsテーブルを全件読み込む
     setState(() => isLoading = false);                  //「読み込み済」の状態にする
   }
 
@@ -68,7 +68,7 @@ class _CatListPageState extends ConsumerState<CatList> {
                     onTap: () async {                     // cardをtapしたときの処理を設定
                       await Navigator.of(context).push(   // ページ遷移をNavigatorで設定
                         MaterialPageRoute(
-                          builder: (context) => CatDetail(id: cat.id),   // cardのデータの詳細を表示するcat_detail.dartへ遷移
+                          builder: (context) => CatDetail(id: cat.id!),   // cardのデータの詳細を表示するcat_detail.dartへ遷移
                         ),
                       );
                       getCatsList();    // データが更新されているかもしれないので、catsテーブル全件読み直し
@@ -83,7 +83,7 @@ class _CatListPageState extends ConsumerState<CatList> {
         onPressed: () async {                                       // ＋ボタンを押したときの処理を設定
           await Navigator.of(context).push(                         // ページ遷移をNavigatorで設定
             MaterialPageRoute(
-              builder: (context) => const CatDetailEdit()           // 詳細更新画面（元ネタがないから新規登録）を表示するcat_detail_edit.dartへ遷移
+              builder: (context) => const CatEdit()           // 詳細更新画面（元ネタがないから新規登録）を表示するcat_detail_edit.dartへ遷移
             ),
           );
           getCatsList();                                            // 新規登録されているので、catテーブル全件読み直し

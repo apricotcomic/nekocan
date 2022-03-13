@@ -181,7 +181,7 @@ class _CatEditState extends State<CatEdit> {
 
   // 更新処理の呼び出し
   Future updateCat() async {
-    final cat = widget.cats!.copyWith(              // 画面の内容をcatにセット
+    final cat = widget.cats!.copy(              // 画面の内容をcatにセット
       name: name,
       birthday: birthday,
       gender: gender,
