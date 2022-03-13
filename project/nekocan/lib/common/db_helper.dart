@@ -1,26 +1,7 @@
-import 'package:nekocan/model/cats.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-// catsテーブルのカラム名を設定
-const String columnId = 'id';
-const String columnName = 'name';
-const String columnGender = 'gender';
-const String columnBirthday = 'birthday';
-const String columnMemo = 'memo';
-const String columnCreatedAt = 'createdAt';
-
-// catsテーブルのカラム名をListに設定
-const List<String> columns = [
-  columnId,
-  columnName,
-  columnGender,
-  columnBirthday,
-  columnMemo,
-  columnCreatedAt,
-];
-
-// catsテーブルへのアクセスをまとめたクラス
+// テーブルへのアクセスをまとめたクラス
 class DbHelper {
   // DbHelperをinstance化する
   static final DbHelper instance = DbHelper._createInstance();
@@ -35,12 +16,12 @@ class DbHelper {
 
   // データベースをオープンする
   Future<Database> _initDB() async {
-    String path = join(await getDatabasesPath(), 'cats.db'); // cats.dbのパスを取得する
+    String path = join(await getDatabasesPath(), 'nekocan.db'); // nekocan.dbのパスを取得する
 
     return await openDatabase(
       path,
       version: 1,
-      onCreate: _onCreate, // cats.dbがなかった時の処理を指定する（DBは勝手に作られる）
+      onCreate: _onCreate, // nekocan.dbがなかった時の処理を指定する（DBは勝手に作られる）
     );
   }
 
@@ -48,6 +29,7 @@ class DbHelper {
   Future _onCreate(Database database, int version) async {
     //catsテーブルをcreateする
     _catsCreate(database, version);
+    _itemsCreate(database, version);
   }
 
   Future _catsCreate(Database database, int version) async {
@@ -59,6 +41,19 @@ class DbHelper {
         gender TEXT,
         birthday TEXT,
         memo TEXT,
+        createdAt TEXT
+      )
+    ''');
+  }
+
+  Future _itemsCreate(Database database, int version) async {
+    //catsテーブルをcreateする
+    await database.execute('''
+      CREATE TABLE items(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        itemName TEXT,
+        buyShop TEXT,
+        quantity INTEGER,
         createdAt TEXT
       )
     ''');

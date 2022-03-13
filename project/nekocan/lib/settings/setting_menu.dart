@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nekocan/settings/cats/view/cats_list.dart';
+import 'package:nekocan/settings/items/view/items_list.dart';
 
 class SettingMenu extends StatelessWidget {
   const SettingMenu({Key? key}) : super(key: key);
@@ -46,8 +47,8 @@ class SettingMenu extends StatelessWidget {
     } else {
       if (index == 1) {
         var route = MaterialPageRoute(
-          settings: const RouteSettings(name: '/settings/setting_menu'),
-          builder: (BuildContext context) => const SettingMenu(),
+          settings: const RouteSettings(name: '/settings/items/items_list'),
+          builder: (BuildContext context) => const ItemList(),
         );
         Navigator.push(context, route);
       } else {

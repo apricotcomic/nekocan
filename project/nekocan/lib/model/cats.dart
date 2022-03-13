@@ -1,4 +1,4 @@
-import 'package:nekocan/common/db_helper.dart';
+import 'package:nekocan/common/cats_helper.dart';
 import 'package:intl/intl.dart';
 
 // catsテーブルの定義
