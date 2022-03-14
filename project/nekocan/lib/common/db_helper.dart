@@ -30,6 +30,7 @@ class DbHelper {
     //catsテーブルをcreateする
     _catsCreate(database, version);
     _itemsCreate(database, version);
+    _shopsCreate(database, version);
   }
 
   Future _catsCreate(Database database, int version) async {
@@ -47,13 +48,24 @@ class DbHelper {
   }
 
   Future _itemsCreate(Database database, int version) async {
-    //catsテーブルをcreateする
+    //itemsテーブルをcreateする
     await database.execute('''
       CREATE TABLE items(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         itemName TEXT,
         buyShop TEXT,
         quantity INTEGER,
+        createdAt TEXT
+      )
+    ''');
+  }
+
+  Future _shopsCreate(Database database, int version) async {
+    //shopsテーブルをcreateする
+    await database.execute('''
+      CREATE TABLE shops(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        shopName TEXT,
         createdAt TEXT
       )
     ''');

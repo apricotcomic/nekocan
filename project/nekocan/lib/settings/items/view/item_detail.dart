@@ -40,7 +40,7 @@ class _ItemDetailState extends State<ItemDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('猫詳細'),
+        title: const Text('商品詳細'),
         actions: [
           IconButton(
             onPressed: () async {                          // 鉛筆のアイコンが押されたときの処理を設定
